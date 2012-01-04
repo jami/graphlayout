@@ -1,0 +1,9 @@
+#ifndef CONFIG_H_
+#define CONFIG_H_
+
+#cmakedefine WIN32
+#cmakedefine UNIX
+#define HOMEREPOSITORY ".graphlayout"
+
+#endif
+~        
