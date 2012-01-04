@@ -28,10 +28,12 @@ endif(NOT WIN32)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules/")
 
-link_libraries (
+link_libraries(
+    graphlayout
 )
 
 include_directories(
+    "${CMAKE_SOURCE_DIR}/include}"
 )
 
 # -------------------------

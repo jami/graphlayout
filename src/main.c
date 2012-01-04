@@ -1,14 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "commandline.h"
 
 int main (int argc, char *argv[])
 {
-    if (argc < 2) {
-        fprintf(stdout,"Usage: %s number\n",argv[0]);
-        return 1;
-    }
+    command_line_option *option = command_line_option_constructor(argc, argv);
 
-    double inputValue = atof(argv[1]);
-    fprintf(stdout,"The square root of %g\n", inputValue);
+
+
+    command_line_option_destruction(option);
     return 0;
 }
