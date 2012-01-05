@@ -4,6 +4,6 @@
 /* #undef WIN32 */
 #define UNIX
 #define HOMEREPOSITORY ".graphlayout"
+#define TESTDATAPATH "/home/jami/devel/graphlayout/testdata/"
 
 #endif
-~        

@@ -6,35 +6,38 @@ PROJECT(GraphLayout)
 # A warning appeared because minimum version must be
 # explicited.
 # The warning told me to add this :
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required( VERSION 2.6 )
 
-# A warning appeared because cmake must look for cppunit.
-# The warning told me to add this :
-if(COMMAND cmake_policy)
-  cmake_policy(SET CMP0003 NEW)
-endif(COMMAND cmake_policy)
+if( COMMAND cmake_policy )
+    cmake_policy( SET CMP0011 NEW )
+endif( COMMAND cmake_policy )
 
-SET(COMMON_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/bin")
-SET(COMMON_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/libs")
+set( COMMON_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/bin" )
+set( COMMON_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/libs" )
 
 # build type
-SET(CMAKE_BUILD_TYPE Debug)
-SET(CMAKE_VERBOSE_MAKEFILE OFF)
+set( CMAKE_BUILD_TYPE Debug )
+set( CMAKE_VERBOSE_MAKEFILE ON )
+# test path
+SET( TESTDATAPATH "${CMAKE_CURRENT_BINARY_DIR}/testdata/" )
 
 if(NOT WIN32)
-  set(COMPILE_FLAGS "-g -ansi -pedantic -Wall -Werror")
+    set(COMPILE_FLAGS "-g -ansi -pedantic -Wall -Werror")
 endif(NOT WIN32)
 
+set( CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules/" )
 
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules/")
+#requires gtk2.6
+find_package( GTK2 2.6 REQUIRED gtk )
 
-link_libraries(
-    graphlayout
-)
+#require libxml2
+find_package( LibXml2 REQUIRED )
 
-include_directories(
-    "${CMAKE_SOURCE_DIR}/include}"
-)
+set(CORELIBS ${LIBXML2_LIBRARIES} ${GTK2_LIBRARIES} graphlayout )
+set(COREFLAGS ${LIBXML2_INCLUDE_DIRS} ${GTK2_INCLUDE_DIRS} "${CMAKE_SOURCE_DIR}/include" )
+
+link_libraries( ${CORELIBS} )
+include_directories( ${COREFLAGS} "/usr/include/libxml2" )
 
 # -------------------------
 # Set data mounting node

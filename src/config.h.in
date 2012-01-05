@@ -4,6 +4,6 @@
 #cmakedefine WIN32
 #cmakedefine UNIX
 #define HOMEREPOSITORY ".graphlayout"
+#cmakedefine TESTDATAPATH "@TESTDATAPATH@"
 
 #endif
-~        
